@@ -4,6 +4,7 @@ import Input from "./Input"
 import Loading from "./Loading"
 import "../styles/General.css"
 import "../styles/Login.css"
+import axios from 'axios'
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -29,10 +30,26 @@ const LoginForm = () => {
 
   const handleLogin = async () => {
     setLoading(true);
-    await sleep(5000)
-    //navigate
     setError("");
-  };
+    try 
+    {
+      const res = await axios.post("http://localhost:5000/api/login", { email, password });
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data));
+      //navigate("/home"); 
+    } 
+    catch (error) 
+    {
+      if (error.response.status === 401)
+        setError("Credenciales incorrectas");
+      else
+        setError(error.response.error);
+    } 
+    finally 
+    {
+      setLoading(false);
+    }
+ };
 
   return (
     <div className="login-container" style={{ backgroundImage: "url('/entrenamiento.jpg')" }}>

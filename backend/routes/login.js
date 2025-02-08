@@ -9,13 +9,12 @@ router.post("/", async (req, res) => {
     {
       const { email, password } = req.body;
       const user = await getUserByEmail(email);
-      const message = "Credenciales incorrectas";
       if (user === null)
-        return res.status(401).json({ error: message });
+        return res.status(401).json();
 
       const validPassword = await bcrypt.compare(password, user.password);
       if (!validPassword)
-        return res.status(401).json({ error: message });
+        return res.status(401).json();
 
       const token = await generateToken(user);
       return res.status(200).json({ token, user });
