@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const express = require("express");
-const { getUserByEmail, comparePasswords } = require("../services/user");
-const { generateToken } = require("../utils/jwt");
+const { getUserByEmail } = require("../services/user");
+const { generateToken, validateToken } = require("../utils/jwt");
 const router = express.Router();
 
 router.post("/", async (req, res) => {
@@ -25,5 +25,18 @@ router.post("/", async (req, res) => {
         res.status(500).json({ error: message });
     }
   });
+
+router.get("/", async (req, res) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  const isValid = validateToken(token);
+  if (isValid)
+  {
+    res.status(200).json({ valid: true });
+  } 
+  else 
+  {
+    res.status(401).json({ valid: false });
+  }
+});
   
-  module.exports = router;
+module.exports = router;

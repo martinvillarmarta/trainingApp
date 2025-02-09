@@ -19,7 +19,19 @@ const generateToken = async (user) => {
     }
 };
 
-module.exports = { generateToken };
+const validateToken = (token) => {
+    try 
+    {
+      jwt.verify(token, config.JWT_SECRET);
+      return true;
+    } 
+    catch (error) 
+    {
+      return false;
+    }
+  };
+
+module.exports = { generateToken, validateToken };
       
 
       
