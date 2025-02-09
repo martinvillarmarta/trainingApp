@@ -1,18 +1,18 @@
 .panel {
-    background-color: #1a202c; /* Equivalente a bg-gray-900 */
+    background-color: #1a202c; 
     color: white;
-    padding: 1.5rem; /* Equivalente a p-6 */
-    border-radius: 0.5rem; /* Equivalente a rounded-lg */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Equivalente a shadow-lg */
+    padding: 1.5rem; 
+    border-radius: 0;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 28rem; /* Equivalente a max-w-md */
+    max-width: 40rem;
     text-align: left;
   }
   
   .panel p {
-    font-size: 1.125rem; /* Equivalente a text-lg */
+    font-size: 1.125rem;
   }
   
   .panel strong {
-    font-weight: 600; /* Equivalente a font-semibold */
+    font-weight: 600;
   }

@@ -1,10 +1,10 @@
-const db = require("../db/database");
+const User = require("../models/user");
 
 const getUserByEmail = async (email) => {
     try 
     {
-        const [users] = await db.execute("SELECT * FROM users WHERE email = ? LIMIT 1", [email]);
-        return users.length > 0 ? users[0] : null;
+        const user = await User.findOne({ where: { email } });
+        return user ? user.toJSON() : null;
     } 
     catch (error) 
     {

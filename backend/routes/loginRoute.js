@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const express = require("express");
-const { getUserByEmail } = require("../services/user");
+const { getUserByEmail } = require("../services/userService");
 const { generateToken, validateToken } = require("../utils/jwt");
 const router = express.Router();
 
@@ -22,6 +22,7 @@ router.post("/", async (req, res) => {
     catch (error) 
     {
         const message = "Error en el proceso de login";
+        console.log(message + error);
         res.status(500).json({ error: message });
     }
   });
