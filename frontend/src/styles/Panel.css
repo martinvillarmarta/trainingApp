@@ -1,0 +1,18 @@
+.panel {
+    background-color: #1a202c; /* Equivalente a bg-gray-900 */
+    color: white;
+    padding: 1.5rem; /* Equivalente a p-6 */
+    border-radius: 0.5rem; /* Equivalente a rounded-lg */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Equivalente a shadow-lg */
+    width: 100%;
+    max-width: 28rem; /* Equivalente a max-w-md */
+    text-align: left;
+  }
+  
+  .panel p {
+    font-size: 1.125rem; /* Equivalente a text-lg */
+  }
+  
+  .panel strong {
+    font-weight: 600; /* Equivalente a font-semibold */
+  }

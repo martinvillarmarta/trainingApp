@@ -1,4 +1,5 @@
 .login-container {
+    background-image: "url('/entrenamiento.jpg')";
     display: flex;
     align-items: center;
     justify-content: center;

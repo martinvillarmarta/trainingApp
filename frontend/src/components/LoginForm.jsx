@@ -35,15 +35,19 @@ const LoginForm = () => {
     {
       const res = await axios.post("http://localhost:5000/api/login", { email, password });
       localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data));
-      //navigate("/home"); 
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+      navigate("/home"); 
     } 
     catch (error) 
     {
       if (error.response.status === 401)
+      {
         setError("Credenciales incorrectas");
+      }
       else
+      {
         setError(error.response.error);
+      }
     } 
     finally 
     {
@@ -52,7 +56,7 @@ const LoginForm = () => {
  };
 
   return (
-    <div className="login-container" style={{ backgroundImage: "url('/entrenamiento.jpg')" }}>
+    <div className="login-container">
       <div className="login-overlay"></div>
       <div className="login-box">
         <h2 className="login-title">Login</h2>
