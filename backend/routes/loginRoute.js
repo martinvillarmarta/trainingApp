@@ -1,8 +1,9 @@
 const bcrypt = require("bcryptjs");
 const express = require("express");
 const { getUserByEmail } = require("../services/userService");
-const { generateToken, validateToken } = require("../utils/jwt");
+const { generateToken, validateToken, registerAttempt } = require("../utils/jwt");
 const router = express.Router();
+attempts = []
 
 router.post("/", async (req, res) => 
 {
@@ -11,13 +12,21 @@ router.post("/", async (req, res) =>
       const { email, password } = req.body;
       const user = await getUserByEmail(email);
       if (user === null)
+      {
         return res.status(401).json();
+      }
 
       const validPassword = await bcrypt.compare(password, user.password);
       if (!validPassword)
-        return res.status(401).json();
-
+      {
+          attempts = await registerAttempt(attempts, email);
+          return res.status(401).json();
+      }
       const token = await generateToken(user);
+      if (attempts[email]) 
+      {
+        delete attempts[email]; 
+      }
       return res.status(200).json({ token, user });
     } 
     catch (error) 
@@ -34,11 +43,11 @@ router.get("/", async (req, res) =>
   const isValid = validateToken(token);
   if (isValid)
   {
-    res.status(200).json({ valid: true });
+    return res.status(200).json({ valid: true });
   } 
   else 
   {
-    res.status(401).json({ valid: false });
+    return res.status(401).json({ valid: false });
   }
 });
   

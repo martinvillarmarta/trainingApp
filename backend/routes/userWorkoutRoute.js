@@ -10,7 +10,7 @@ router.get("/:userId/workouts", async (req, res) =>
         const userId = req.params.userId;
         const { startDate, endDate } = req.query;
         const workouts = await getWorkoutsByUserIdAndDates(userId, startDate, endDate);
-        res.json(workouts);
+        return res.status(200).json(workouts);
     }
     catch (error) 
     {
@@ -30,12 +30,12 @@ router.post("/:userId/workouts", async (req, res) =>
       const token = req.headers.authorization?.split(" ")[1];
       const isValid = validateToken(token);
       if (!isValid)
-      {
-        res.status(401).json({ valid: false });
+      {      
+        return res.status(401).json({ valid: false });
       } 
 
       await addWorkoutToUser(userId, title, date);   
-      res.status(201).json({ message: "Entrenamiento guardado correctamente" });
+      return res.status(201).json({ message: "Entrenamiento guardado correctamente" });
     } 
     catch (error) 
     {

@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const config = require("../config/login.config.js");
+const { sendMailjetMail } = require("../utils/mail");
 
 const generateToken = async (user) => 
 {
@@ -31,9 +32,38 @@ const validateToken = (token) =>
     {
       return false;
     }
-  };
+};
 
-module.exports = { generateToken, validateToken };
+const registerAttempt = async (attemps, email) => 
+{
+  const seconds = Math.floor(Date.now() / 1000);
+  if (!attemps[email]) 
+  {
+     attemps[email] = { count: 1, time: seconds };
+  } 
+  else 
+  {
+    if (seconds - attemps[email].time > 60) 
+    {
+          attemps[email] = { count: 1, firstAttemptTime: nowInSeconds };
+    }
+    else
+    {
+      attemps[email] = { count: attemps[email].count + 1, time: attemps[email].time };
+    }
+
+    if (attemps[email].count >= 3) 
+      {
+      await sendMailjetMail("comunicacion@entrenavirtual.es", "Alerta de usuario con password incorrecta",
+        `El usuario con mail ${email} ha intentado acceder tres veces seguidas con password incorrecta`,
+        "administracion@entrenavirtual.es"
+      );
+    }
+  }  
+  return attemps;  
+}
+
+module.exports = { generateToken, validateToken, registerAttempt };
       
 
       
