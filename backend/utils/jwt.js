@@ -1,7 +1,8 @@
 const jwt = require("jsonwebtoken");
 const config = require("../config/login.config.js");
 
-const generateToken = async (user) => {
+const generateToken = async (user) => 
+{
     try 
     {
         const payload = { 
@@ -19,7 +20,8 @@ const generateToken = async (user) => {
     }
 };
 
-const validateToken = (token) => {
+const validateToken = (token) => 
+{
     try 
     {
       jwt.verify(token, config.JWT_SECRET);

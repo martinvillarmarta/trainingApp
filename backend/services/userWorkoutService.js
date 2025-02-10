@@ -1,7 +1,8 @@
 const UserWorkout = require("../models/userWorkout");
 const { Op } = require("sequelize");
 
-const getWorkoutsByUserIdAndDates = async (userId, startDate, endDate) => {
+const getWorkoutsByUserIdAndDates = async (userId, startDate, endDate) => 
+{
     try 
     {  
         const formatStartDate = new Date(startDate);
@@ -16,9 +17,25 @@ const getWorkoutsByUserIdAndDates = async (userId, startDate, endDate) => {
     } 
     catch (error) 
     {
-        console.error("Error al obtener los entrenamientos del usuario:", error);
         throw error;
     }
 };
 
-module.exports = { getWorkoutsByUserIdAndDates };
+const addWorkoutToUser = async(userId, title, date) => 
+{
+    try 
+    {  
+        const formatDate = new Date(date);
+        return await UserWorkout.create({
+            title: title,
+            date: formatDate,
+            userId: userId
+        });
+    } 
+    catch (error) 
+    {
+        throw error;
+    }
+}
+
+module.exports = { getWorkoutsByUserIdAndDates, addWorkoutToUser };

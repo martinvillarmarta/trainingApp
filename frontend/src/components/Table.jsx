@@ -1,7 +1,8 @@
 import "../styles/Table.css"
 import "../styles/General.css"
 
-function Table({ data }) {
+function Table({ data }) 
+{
     return (
         <div className="table-container">
           <h3 className="table-title">Entrenamientos de los últimos 3 días</h3>

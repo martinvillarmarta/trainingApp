@@ -1,7 +1,8 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../db/database"); 
 
-const UserWorkout = sequelize.define("User_Workout", { 
+const UserWorkout = sequelize.define("User_Workout", 
+  { 
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true }, 
     title: { type: DataTypes.STRING, allowNull: false }, 
     date: { type: DataTypes.DATE, allowNull: false }, 

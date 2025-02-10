@@ -5,11 +5,11 @@
   }
   
   .loading-spinner {
-    width: 2.5rem; /* w-10 */
-    height: 2.5rem; /* h-10 */
-    border-width: 4px; /* border-4 */
+    width: 2.5rem; 
+    height: 2.5rem; 
+    border-width: 4px;
     border-style: solid;
-    border-color: #3b82f6 transparent #3b82f6 #3b82f6; /* border-blue-500 border-t-transparent */
+    border-color: #3b82f6 transparent #3b82f6 #3b82f6;
     border-radius: 50%;
     animation: spin 1s linear infinite;
   }

@@ -4,7 +4,8 @@ const { getUserByEmail } = require("../services/userService");
 const { generateToken, validateToken } = require("../utils/jwt");
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post("/", async (req, res) => 
+{
     try 
     {
       const { email, password } = req.body;
@@ -27,7 +28,8 @@ router.post("/", async (req, res) => {
     }
   });
 
-router.get("/", async (req, res) => {
+router.get("/", async (req, res) => 
+{
   const token = req.headers.authorization?.split(" ")[1];
   const isValid = validateToken(token);
   if (isValid)
