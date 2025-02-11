@@ -80,6 +80,11 @@ function Home()
     }
   }, [storedUser, token]);
 
+  const handleOnClick = () =>
+  {
+    validateSession();
+    setShowForm(!showForm)
+  }
 
   const handleSaveWorkout = async (newWorkout) => 
   {
@@ -123,7 +128,7 @@ function Home()
     <div className="home">
       <Panel user={user} />
       <div className="workout-form-container">
-        <button className="toggle-form-button" onClick={() => setShowForm(!showForm)}>
+        <button className="toggle-form-button" onClick={handleOnClick}>
           {showForm ? "Ocultar Formulario" : "Añadir Entrenamiento"}
         </button>
         {successMessage && <p className="success-message">{successMessage}</p>}
