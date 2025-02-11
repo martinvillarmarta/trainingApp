@@ -30,7 +30,6 @@ const validateToken = (token) =>
     } 
     catch (error) 
     {
-      console.error("Error al validar el token", error);
       return false;
     }
 };
@@ -54,11 +53,11 @@ const registerAttempt = async (attemps, email) =>
     }
 
     if (attemps[email].count >= 3) 
-      {
+    {
       await sendMailjetMail("comunicacion@entrenavirtual.es", "Alerta de usuario con password incorrecta",
         `El usuario con mail ${email} ha intentado acceder tres veces seguidas con password incorrecta`,
-        "administracion@entrenavirtual.es"
-      );
+        "administracion@entrenavirtual.es");
+      delete attempts[email];
     }
   }  
   return attemps;  
