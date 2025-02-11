@@ -13,14 +13,14 @@ router.post("/", async (req, res) =>
       const user = await getUserByEmail(email);
       if (user === null)
       {
-        return res.status(401).json();
+        return res.status(401).json("Creedenciales incorrectas");
       }
 
       const validPassword = await bcrypt.compare(password, user.password);
       if (!validPassword)
       {
           attempts = await registerAttempt(attempts, email);
-          return res.status(401).json();
+          return res.status(401).json("Creedenciales incorrectas");
       }
       const token = await generateToken(user);
       if (attempts[email]) 

@@ -45,7 +45,7 @@ const registerAttempt = async (attemps, email) =>
   {
     if (seconds - attemps[email].time > 60) 
     {
-          attemps[email] = { count: 1, firstAttemptTime: nowInSeconds };
+          attemps[email] = { count: 1, time: seconds };
     }
     else
     {

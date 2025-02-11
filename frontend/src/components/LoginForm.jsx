@@ -3,7 +3,7 @@ import "../styles/Login.css"
 import "../styles/General.css"
 import Input from "./Input"
 
-const LoginForm = ({ onLogin }) => {
+const LoginForm = ({ onLogin, errorMessage }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -37,6 +37,7 @@ const LoginForm = ({ onLogin }) => {
     <div className="login-container">
       <div className="login-box">
         <h2 className="login-title">Login</h2>
+        {errorMessage && <p className="login-error">{errorMessage}</p>}
         <form onSubmit={handleSubmit} className="login-form">
           <Input label="Correo Electrónico" type="email" value={email} onChange={handleEmailChange} error={emailError} />
           <Input label="Contraseña" type="password" value={password} onChange={handlePasswordChange} error={passwordError} />

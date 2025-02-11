@@ -9,6 +9,14 @@ router.get("/:userId/workouts", async (req, res) =>
     {
         const userId = req.params.userId;
         const { startDate, endDate } = req.query;
+
+        const token = req.headers.authorization?.split(" ")[1];
+        const isValid = validateToken(token);
+        if (!isValid)
+        {      
+            return res.status(401).json({ valid: false });
+        } 
+
         const workouts = await getWorkoutsByUserIdAndDates(userId, startDate, endDate);
         return res.status(200).json(workouts);
     }

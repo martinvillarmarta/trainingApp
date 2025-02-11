@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import LoginForm from "../components/LoginForm"
 import "../styles/Login.css"
@@ -6,13 +6,15 @@ import axios from "axios"
 
 const Login = () => 
 {
-  const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
+  useEffect(() => 
+  {
+  }, [errorMessage]);
+
   const handleLogin = async ({ email, password }) => 
   {
-    setLoading(true);
     setErrorMessage("");
 
     try 
@@ -24,20 +26,14 @@ const Login = () =>
     } 
     catch (error) 
     {
-      const message = "Error en el inicio de sesión";
+      const message = error.response?.data || "Error en el inicio de sesión";
       setErrorMessage(message);
-      console.error(message, error)
     } 
-    finally 
-    {
-      setLoading(false);
-    }
   };
-
+  
   return (
     <div className="login-page">
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-      <LoginForm onLogin={handleLogin} />
+      <LoginForm onLogin={handleLogin} errorMessage={errorMessage} />
     </div>
   );
 };

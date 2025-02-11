@@ -90,6 +90,7 @@ function Home()
 
     try 
     {
+      validateSession();
       await axios.post(
         `http://localhost:5000/api/user/${parsedUser.id}/workouts`, newWorkout,
         { headers: { Authorization: `Bearer ${token}` } }
