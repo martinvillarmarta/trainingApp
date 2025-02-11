@@ -2,8 +2,9 @@ import React, { useState } from "react"
 import "../styles/Login.css"
 import "../styles/General.css"
 import Input from "./Input"
+import Loading from "./Loading"
 
-const LoginForm = ({ onLogin, errorMessage }) => {
+const LoginForm = ({ onLogin, errorMessage, loading }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -32,7 +33,7 @@ const LoginForm = ({ onLogin, errorMessage }) => {
       onLogin({ email, password });
     }
   };
-
+  
   return (
     <div className="login-container">
       <div className="login-box">
@@ -42,7 +43,7 @@ const LoginForm = ({ onLogin, errorMessage }) => {
           <Input label="Correo Electrónico" type="email" value={email} onChange={handleEmailChange} error={emailError} />
           <Input label="Contraseña" type="password" value={password} onChange={handlePasswordChange} error={passwordError} />
           <button type="submit" className="login-button" disabled={emailError || passwordError || !email || !password}>
-            Iniciar sesión
+          {loading ? <Loading /> : "Iniciar sesión"}
           </button>
         </form>
       </div>

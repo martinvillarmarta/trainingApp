@@ -7,14 +7,16 @@ import axios from "axios"
 const Login = () => 
 {
   const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => 
   {
-  }, [errorMessage]);
+  }, [errorMessage, loading]);
 
   const handleLogin = async ({ email, password }) => 
   {
+    setLoading(true);
     setErrorMessage("");
 
     try 
@@ -29,11 +31,15 @@ const Login = () =>
       const message = error.response?.data || "Error en el inicio de sesión";
       setErrorMessage(message);
     } 
+    finally
+    {
+      setLoading(false);
+    }
   };
   
   return (
     <div className="login-page">
-      <LoginForm onLogin={handleLogin} errorMessage={errorMessage} />
+      <LoginForm onLogin={handleLogin} errorMessage={errorMessage} loading={loading} />
     </div>
   );
 };

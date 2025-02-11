@@ -28,9 +28,7 @@ const WorkoutForm = ({ onSave }) => {
           <label className="form-label">Fecha</label>
           <input type="date" className="form-input" value={date} onChange={(e) => setDate(e.target.value)} required/>
         </div>
-        <button type="submit" className="form-button">
-          Guardar
-        </button>
+        <button type="submit" className="form-button">Guardar</button>
       </form>
     </div>
   );

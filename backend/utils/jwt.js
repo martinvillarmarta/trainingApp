@@ -30,6 +30,7 @@ const validateToken = (token) =>
     } 
     catch (error) 
     {
+      console.error("Error al validar el token", error);
       return false;
     }
 };
